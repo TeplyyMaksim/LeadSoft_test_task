@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- meta things -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Результати</title>
+    
+    <!-- bootstrap -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- custom styles -->
+    <link rel='stylesheet' href='{{"tutorial:static/results.css"|static_url }}'>
+</head>
+<body>
+
+    {% if counter == 0 %}
+        <h1>Немає товарів в заданому ціновому діапазоні.</h1>
+    {% elif ( pricefrom !=0 and priceto != '' ) %}
+        <h1>У ціновому діапазоні від {{ pricefrom }} до {{ priceto }} гривень знайдено {{ counter }} товарів:</h1>
+    {% elif pricefrom != 0 %}
+        <h1>Знайдено {{ counter }} товарів дорожчих за {{ pricefrom }} гривень:</h1>
+    {% elif priceto != '' %}
+        <h1>Знайдено {{ counter }} товарів дешевших за {{ priceto }} гривень:</h1>
+    {% else %}
+        <h1>Цінових меж не задано. Список всіх товарів:</h1>
+    {% endif %}
+    
+    {% if data|length >= 1 %}
+        <div class="container marketing">
+          <div class="row">
+            {% for item in data %}
+                <div class="col-lg-4">
+                  <img class="img-thumbnail img-responsive" src="{{ item[1] }}" alt="{{ item[0] }} image" width="140" height="140">
+                  <h2>{{ item[0] }}</h2>
+                  <h4>Ціна: {{ item[2] }} гривень</h4>
+                  <!-- Bonus {{ item[3] }} -->
+                  {% if item[3] == "Out of stock" %}
+                    <p><span class="label label-default">Немає в наявності</span></p>
+                  {% elif item[3] == "Superprice" %}
+                    <p><span class="label label-danger">Суперціна</span></p>
+                  {% elif item[3] == "Action" %}
+                    <p><span class="label label-warning">Акція</span></p>
+                  {% endif %}
+                  <p><a class="btn btn-info" href="{{ item[4] }}" role="button">Сторінка товару &raquo;</a></p>
+                </div>
+                {{ loop.cycle('', '', '</div><hr><div class="row">')|safe }}
+            {% endfor %}
+        </div>
+    {% endif %}
+    <h3><a class="btn btn-success" href="/" role="button">На головну</a></h3>  
+</body>
+<html>

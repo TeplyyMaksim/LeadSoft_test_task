@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- meta things -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Введіть діапазон цін</title>
+    
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- custom styles -->
+    <link rel='stylesheet' href='{{"tutorial:static/home.css"|static_url }}'>
+</head>
+<body>
+    <div class="container">
+
+      <form class="form-signin" action="/results" method="get">
+        <h2 class="form-signin-heading">Введіть діапазон цін</h2>
+        <label for="inputEmail" class="sr-only">Від</label>
+        <input type="number" name="pricefrom" class="form-control number-from-input" placeholder="Від" autofocus>
+        <label for="inputPassword" class="sr-only">До</label>
+        <input type="number" name="priceto" class="form-control number-to-input" placeholder="До">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Пошук</button>
+      </form>
+    </div> <!-- /container -->
+    
+    <div class="container">
+        <div class="row">
+            <div class="center-me">
+                <p id="show-me-all"><a class="btn btn-success" href="/results" role="button">Всі доступні товари</a></p> 
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
